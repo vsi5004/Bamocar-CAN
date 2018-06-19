@@ -7,13 +7,6 @@ class Bamocar
 {
 public:
   Bamocar();
-  /**
-     * Initialise the select pin, transmit id, receive id, and baudrate of the class
-     * @param txID          Transmit CAN ID
-     * @param rxID          Receive CAN ID
-     * @param baudRate      CAN Bus baud rate
-     */
-  void setupCAN(unsigned short txID, unsigned short rxID, unsigned short baudrate);
 
   void startCAN();
 
