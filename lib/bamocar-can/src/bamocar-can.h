@@ -13,16 +13,16 @@ public:
      * @param rxID          Receive CAN ID
      * @param baudRate      CAN Bus baud rate
      */
-  void setupCAN(uint16_t txID, uint16_t rxID, uint8_t baudrate);
+  void setupCAN(unsigned short txID, unsigned short rxID, unsigned short baudrate);
 
   void startCAN();
 
-  void getSpeed(uint8_t interval);
-  void setSpeed(uint32_t speed);
-  void setTorque(uint32_t torque);
-  void getCurrent(uint8_t interval);
-  void getCurrentDevice(uint8_t interval);
-  void getMotorTemp(uint8_t interval);
+  void getSpeed(char interval);
+  void setSpeed(unsigned int	 speed);
+  void setTorque(unsigned int	 torque);
+  void getCurrent(char interval);
+  void getCurrentDevice(char interval);
+  void getMotorTemp(char interval);
   void getStatus();
   void setSoftEnable(bool enable);
   void setHardEnable(bool enable);
@@ -33,15 +33,15 @@ private:
   /**
      * Transmit ID of motor controller
      */
-  uint16_t m_txID;
+  unsigned short m_txID;
   /**
      * Receive ID of motor controller
      */
-  uint16_t m_rxID;
+  unsigned short m_rxID;
   /**
      * Buadrate of motor controller
      */
-  uint8_t m_baudrate;
+  char m_baudrate;
 
   unsigned char m_data [3];
 
