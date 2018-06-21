@@ -11,8 +11,8 @@ public:
   void startCAN();
 
   void getSpeed(char interval);
-  void setSpeed(unsigned int	 speed);
-  void setTorque(unsigned int	 torque);
+  void setSpeed(unsigned int speed);
+  void setTorque(unsigned int	torque);
   void getCurrent(char interval);
   void getCurrentDevice(char interval);
   void getMotorTemp(char interval);
@@ -38,7 +38,7 @@ private:
 
   unsigned char m_data [3];
 
-  void sendCAN(unsigned char stmp[]);
+  void sendCAN(char stmp[]);
 };
 
 #endif

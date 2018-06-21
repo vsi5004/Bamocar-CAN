@@ -12,7 +12,9 @@ Bamocar::Bamocar()
     // Do nothing
 }
 
-CAN can1(PB_8 ,PB_9 );
+CAN can1(PB_8, PB_9);
+CAN can2(PB_5, PB_6); // (rd, td)
+CANMessage msg;
 
 /**
  * ==========
@@ -22,6 +24,7 @@ CAN can1(PB_8 ,PB_9 );
 void Bamocar::startCAN()
 {
     can1.frequency(100000);
+    can2.frequency(100000);
     printf("CAN init ok!\r\n");
 }
 
@@ -30,12 +33,13 @@ void Bamocar::startCAN()
  * Bamocar::sendCAN
  * ==========
  */
-void Bamocar::sendCAN(unsigned char stmp[])
+void Bamocar::sendCAN(char stmp[])
 {
-    const char* strOut = (const char *)stmp;
-    if(can1.write(CANMessage(1100, strOut, 8))) {
+    const char *strOut = (const char *)stmp;
+    if (can1.write(CANMessage(1100, strOut, 8)))
+    {
         printf("loop send()\r\n");
-        printf("Message sent: %s\r\n", stmp);
+        printf("Message sent: %s\r\n", strOut);
     }
 }
 
@@ -46,10 +50,10 @@ void Bamocar::sendCAN(unsigned char stmp[])
  */
 void Bamocar::listenCAN()
 {
-    unsigned char len = 5;
-    unsigned char buf[5];
-
-
+    if (can2.read(msg))
+    {
+        printf("Message received: %c %c %c %c %c %c %c %d, from %d\r\n", msg.data[0], msg.data[1], msg.data[2], msg.data[3], msg.data[4], msg.data[5], msg.data[6], msg.data[7], msg.id);
+    }
 }
 
 void Bamocar::getSpeed(char interval)
@@ -62,7 +66,7 @@ void Bamocar::getSpeed(char interval)
 void setSpeed(unsigned int speed)
 {
 }
-void setTorque(unsigned int	torque)
+void setTorque(unsigned int torque)
 {
 }
 void Bamocar::getCurrent(char interval)
