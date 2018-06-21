@@ -36,7 +36,7 @@ private:
      */
   char m_baudrate;
 
-  unsigned char m_data [3];
+  char m_data [3];
 
   void sendCAN(char stmp[]);
 };
