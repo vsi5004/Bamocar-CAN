@@ -11,8 +11,8 @@
 
 #define REG_TORQUE_CMD    0x90    //Torque reference
 
-#define REQ_RAMP_ACC      0x35    //Ramp Acceleration command
-#define REQ_RAMP_DEC      0xED    //Ramp Deceleration command
+#define REG_RAMP_ACC      0x35    //Ramp Acceleration command
+#define REG_RAMP_DEC      0xED    //Ramp Deceleration command
 
 #define REG_REQUEST       0x3D    //Transmission request
 

@@ -1,8 +1,6 @@
 #ifndef bamocar_can_h
 #define bamocar_can_h
 
-
-
 class Bamocar
 {
 public:
@@ -12,13 +10,15 @@ public:
 
   void getSpeed(char interval);
   void setSpeed(unsigned int speed);
-  void setTorque(unsigned int	torque);
+  void setAccel(unsigned int period);
+  void setDecel(unsigned int period);
+  void setTorque(unsigned int torque);
   void getCurrent(char interval);
   void getCurrentDevice(char interval);
   void getMotorTemp(char interval);
-  void getStatus();
+  void getStatus(char interval);
   void setSoftEnable(bool enable);
-  void setHardEnable(bool enable);
+  void getHardEnable(char interval);
 
   void listenCAN();
 
@@ -36,7 +36,7 @@ private:
      */
   char m_baudrate;
 
-  char m_data [3];
+  char m_data[3];
 
   void sendCAN(char stmp[]);
 };
