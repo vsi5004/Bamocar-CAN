@@ -19,14 +19,11 @@ public:
   void getStatus(char interval);
   void setSoftEnable(bool enable);
   void getHardEnable(char interval);
+  void setRxID (unsigned short rxID);
 
   void listenCAN();
 
 private:
-  /**
-     * Transmit ID of motor controller
-     */
-  unsigned short m_txID;
   /**
      * Receive ID of motor controller
      */

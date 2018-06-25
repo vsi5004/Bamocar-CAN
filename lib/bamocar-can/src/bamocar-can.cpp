@@ -9,12 +9,13 @@
  */
 Bamocar::Bamocar()
 {
-    // Do nothing
+    //sets rx address to bamocar controller default
+    m_rxID = 0x201;
 }
 
 CAN can1(PB_8, PB_9);
 CAN can2(PB_5, PB_6); // (rd, td)
-CANMessage msg;
+CANMessage recieveMsg;
 CANMessage sendMsg;
 
 /**
@@ -31,6 +32,15 @@ void Bamocar::startCAN()
 
 /**
  * ==========
+ * Bamocar::setRxID
+ * ==========
+ */
+void Bamocar::setRxID(unsigned short rxID){
+    m_rxID = rxID;
+}
+
+/**
+ * ==========
  * Bamocar::sendCAN
  * ==========
  */
@@ -39,7 +49,7 @@ void Bamocar::sendCAN(char stmp[])
     sendMsg.data[0] = stmp[0];
     sendMsg.data[1] = stmp[1];
     sendMsg.data[2] = stmp[2]; 
-    sendMsg.id = 1100;
+    sendMsg.id = m_rxID;
     sendMsg.len = 0x03;
     sendMsg.format = CANStandard;
     if (can1.write(sendMsg))
@@ -56,16 +66,16 @@ void Bamocar::sendCAN(char stmp[])
  */
 void Bamocar::listenCAN()
 {
-    if (can2.read(msg))
+    if (can2.read(recieveMsg))
     {
-        printf("Message received: %x %x %x %x %x %x %x %x, from %d\r\n", msg.data[0], msg.data[1], msg.data[2], msg.data[3], msg.data[4], msg.data[5], msg.data[6], msg.data[7], msg.id);
+        printf("Message received: %x %x %x %x %x %x, from %d\r\n", recieveMsg.data[0], recieveMsg.data[1], recieveMsg.data[2], recieveMsg.data[3], recieveMsg.data[4], recieveMsg.data[5], recieveMsg.id);
     }
 }
 
 void Bamocar::getSpeed(char interval)
 {
-    m_data[0] = REG_N_ACTUAL;
-    m_data[1] = 0x30;
+    m_data[0] = REG_REQUEST;
+    m_data[1] = REG_N_ACTUAL;
     m_data[2] = interval;
     sendCAN(m_data);
 }
